@@ -4,4 +4,4 @@ This is a single page application where we see NASA pic of the day in the home s
 
 Just download and run the app in your simulator to see the app.
 
-There is an API key located in BaseNEtworkManager line number 17 under enum APIURL, you can replace with your key.
+There is an API key located in BaseNetworkManager line number 17 under enum APIURL, you can replace with your key.
