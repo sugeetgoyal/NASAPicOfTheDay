@@ -6,16 +6,19 @@
 //
 
 import UIKit
+import YouTubePlayer
 
 class HomeViewController: BaseViewController {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var nasaImageView: UIImageView!
     @IBOutlet weak var datePickerTextField: UITextField!
     @IBOutlet weak var descriptionLabel: UITextView!
+    @IBOutlet weak var mediaView: YouTubePlayerView!
     let activityIndicator = UIActivityIndicatorView(style: .large)
     
     var homeViewModel = HomeViewModel()
-    
+    var favouriteListModel = FavouriteListModel()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.addDatePicker()
@@ -26,6 +29,38 @@ class HomeViewController: BaseViewController {
         updateModel(date: Date())
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+    }
+    
+    @IBAction func handleFavouriteButton(_ sender: Any) {
+        if let aVC = UIStoryboard(name: "Main", bundle:nil).instantiateViewController(withIdentifier: "FavouriteTableViewController") as? FavouriteTableViewController {
+            aVC.favouriteListModel = favouriteListModel
+            aVC.delegate = self
+            self.navigationController?.pushViewController(aVC, animated: true)
+        }
+    }
+    
+    @IBAction func handleAddToFavourite(_ sender: Any) {
+        if homeViewModel.hasError == true {
+            displayAlertViewController(title: "Can not Add to favourite!", message: "Because of incorrecr data, it cannot add to your favourite list", defaultTitle: nil, canceltTitle: "OK")
+        } else if favouriteListModel.favouriteList.filter({ (model) in
+            model.date == homeViewModel.date
+        }).count == 0 {
+            let homeModel = HomeViewModel()
+            homeModel.title = homeViewModel.title
+            homeModel.mediaURL = homeViewModel.mediaURL
+            homeModel.media_type = homeViewModel.media_type
+            homeModel.date = homeViewModel.date
+            homeModel.description = homeViewModel.description
+
+            favouriteListModel.favouriteList.append(homeModel)
+            displayAlertViewController(title: "Added to Favourite", message: "This is added to your favourite list", defaultTitle: nil, canceltTitle: "OK")
+        } else {
+            displayAlertViewController(title: "Already Added!", message: "This is already added to your favourite list", defaultTitle: nil, canceltTitle: "OK")
+        }
+    }
+
     private func updateModel(date: Date) {
         activityIndicator.startAnimating()
         
@@ -68,10 +103,15 @@ class HomeViewController: BaseViewController {
             datePickerTextField.text = homeViewModel.date
             
             if homeViewModel.media_type == .image {
-                self.nasaImageView.loadImage(withUrl: homeViewModel.imageUrl ?? "")
-            } else {
-                self.nasaImageView.image = UIImage(named: "default_image")
-                //We can write code to load video here or other media. As of now we are only receiving images from the API.
+                self.mediaView.isHidden = true
+                self.nasaImageView.isHidden = false
+                self.nasaImageView.loadImage(withUrl: homeViewModel.mediaURL ?? "")
+            } else if homeViewModel.media_type == .video {
+                self.mediaView.isHidden = false
+                self.nasaImageView.isHidden = true
+                if let url = URL(string: homeViewModel.mediaURL ?? "") {
+                    self.mediaView.loadVideoURL(url)
+                }
             }
             
             self.activityIndicator.stopAnimating()
@@ -100,5 +140,11 @@ class HomeViewController: BaseViewController {
     
     @objc func handleCancelPicker() {
         self.datePickerTextField.resignFirstResponder()
+    }
+}
+
+extension HomeViewController: FavouriteTableViewControllerDelegate {
+    func didSelectItem(for date: String) {
+        updateModel(date: date.toDate())
     }
 }

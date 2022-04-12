@@ -32,20 +32,4 @@ class CloudNetworkRequestModel {
         self.requestType = requestType
         self.observer = observer
     }
-    
-    init(extensionURL:String,
-         requestType:HttpRequestType,
-         observer:BaseNetworkManager) {
-        self.apiPath = extensionURL
-        self.requestType = requestType
-        self.observer = observer
-    }
-    
-    func setRetry(){
-        retryCount += 1
-    }
-    
-    func hasRetry() -> Bool {
-        return (retryCount >= NO_OF_RETRIES)
-    }
 }

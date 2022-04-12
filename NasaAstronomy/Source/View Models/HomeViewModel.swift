@@ -12,15 +12,16 @@ class HomeViewModel {
     var date: String?
     var title: String?
     var description: String?
-    var imageUrl: String?
+    var mediaURL: String?
     var media_type: MediaType?
-    var queryDate : String?
     let cache = NSCache<NSString, PictureResponse>()
     var completionBlock: ((Bool, String) -> Void)?
-
+    var hasError: Bool = false
+    
     func getPictureOfTheDay(_ queryDate: Date, completion: @escaping (_ success: Bool,_ error:String) -> Void) {
         let aRequestModel = PictureRequest()
-        aRequestModel.date = date
+        aRequestModel.date = queryDate.toString()
+        
         APIRouter().getPictureOfTheDay(for: aRequestModel, callBackObject: self)
         completionBlock = completion
     }
@@ -29,7 +30,7 @@ class HomeViewModel {
         self.date = response.date
         self.title = response.title
         self.description = response.explanation
-        self.imageUrl = response.url
+        self.mediaURL = response.url
         self.media_type = response.media_type
     }
 }
@@ -39,11 +40,13 @@ extension HomeViewModel: ApiCallBack {
         if let aResponse = data as? PictureResponse {
             self.updateResponse(response: aResponse)
             cache.setObject(aResponse, forKey: CachedResponseKey as NSString)
+            hasError = false
             completionBlock?(true, "")
         }
     }
     
     func onError(_ errorResponse: ErrorResponse, apiName: APIName) {
+        hasError = true
         completionBlock?(false, errorResponse.message)
     }
 }

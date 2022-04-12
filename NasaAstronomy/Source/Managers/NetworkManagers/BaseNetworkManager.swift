@@ -65,7 +65,6 @@ class BaseNetworkManager: NSObject {
                  contentType: String = "application/json; charset=utf-8",
                  isOldAziksaAPI: Bool = false) -> Void {
         self.networkEnvironment.baseHeader["Content-Type"] = contentType
-        self.networkEnvironment.baseHeader["Authentication"] = NetworkEnvironment.sharedInstance.CSRFToken
         
         let aHeaders = self.networkEnvironment.baseHeader.mutableCopy() as? NSMutableDictionary
         
@@ -85,10 +84,6 @@ class BaseNetworkManager: NSObject {
                                                                                  result: Any?,
                                                                                  response: HTTPURLResponse?,
                                                                                  error: NSError?) -> Void in
-                                                                if let anAuthToken = response?.allHeaderFields["Authentication"] as? String {
-                                                                    NetworkEnvironment.sharedInstance.CSRFToken = anAuthToken
-                                                                }
-                                                                
                                                                 self.handleResponse(requestModel: requestModel, isRequestSuccessful: isRequestSuccessful, result: result, response: response, error: error)
                                                               })
     }
@@ -127,7 +122,7 @@ class BaseNetworkManager: NSObject {
     
     //MARK: - Support method
     private func getErrorMessageAndCode(requestModel: CloudNetworkRequestModel, withResult aResult: AnyObject?, withError anError: NSError?, andResponse aResponse: HTTPURLResponse?) -> (Int, String) {
-        var anErrorMessage = "Unknown Error"
+        var anErrorMessage = anError?.localizedDescription ?? (aResponse?.description ?? "Unknown Error!")
         
         if aResult != nil {
             if aResult is NSDictionary {

@@ -11,7 +11,7 @@
         <!--NASA Pic Of The Day-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="HomeViewController" customModule="NasaAstronomy" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="HomeViewController" id="BYZ-38-t0r" customClass="HomeViewController" customModule="NasaAstronomy" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -36,44 +36,103 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Select Date" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="o9n-HC-ufp">
-                                <rect key="frame" x="16" y="52" width="288" height="34"/>
+                                <rect key="frame" x="16" y="52" width="103" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wkl-0c-QIY" customClass="YouTubePlayerView" customModule="YouTubePlayer">
+                                <rect key="frame" x="16" y="122" width="288" height="188"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ssT-FW-ZiR">
+                                <rect key="frame" x="124" y="52" width="104" height="30"/>
+                                <state key="normal" title="Add to Favorite"/>
+                                <connections>
+                                    <action selector="handleAddToFavourite:" destination="BYZ-38-t0r" eventType="touchUpInside" id="tl3-8a-aBJ"/>
+                                </connections>
+                            </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bCN-Ra-c1T">
-                                <rect key="frame" x="16" y="126" width="288" height="183"/>
+                                <rect key="frame" x="16" y="123" width="288" height="186"/>
                             </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="Asm-Pe-q7f" firstAttribute="top" secondItem="wkl-0c-QIY" secondAttribute="bottom" constant="4" id="1KK-sg-LR0"/>
                             <constraint firstItem="Asm-Pe-q7f" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="2TL-MH-HAJ"/>
+                            <constraint firstItem="bCN-Ra-c1T" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="3d0-Be-qGs"/>
                             <constraint firstItem="o9n-HC-ufp" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="8" id="5hM-qy-U14"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="bCN-Ra-c1T" secondAttribute="trailing" constant="16" id="5tX-T6-rrC"/>
                             <constraint firstItem="j23-5v-3BD" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="6ru-Tx-rgW"/>
+                            <constraint firstItem="wkl-0c-QIY" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="9C6-ot-Hkb"/>
                             <constraint firstItem="o9n-HC-ufp" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="Cdu-k3-cLh"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="bCN-Ra-c1T" secondAttribute="trailing" constant="16" id="HHM-2I-abR"/>
+                            <constraint firstItem="j23-5v-3BD" firstAttribute="top" secondItem="o9n-HC-ufp" secondAttribute="bottom" id="MaJ-t5-mAf"/>
                             <constraint firstItem="j23-5v-3BD" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="38" id="NVz-yw-E1P"/>
-                            <constraint firstItem="bCN-Ra-c1T" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="RCT-iT-fy3"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="o9n-HC-ufp" secondAttribute="trailing" constant="16" id="cdd-pP-zDw"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="wkl-0c-QIY" secondAttribute="trailing" constant="16" id="PeG-lS-KWS"/>
+                            <constraint firstItem="ssT-FW-ZiR" firstAttribute="bottom" secondItem="o9n-HC-ufp" secondAttribute="bottom" id="ULK-4R-Osd"/>
                             <constraint firstItem="Asm-Pe-q7f" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="d7d-hl-IR8"/>
+                            <constraint firstItem="Asm-Pe-q7f" firstAttribute="top" secondItem="bCN-Ra-c1T" secondAttribute="bottom" constant="5" id="eiS-Ls-fjd"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Asm-Pe-q7f" secondAttribute="bottom" constant="16" id="f3B-2l-vjO"/>
                             <constraint firstItem="j23-5v-3BD" firstAttribute="height" relation="lessThanOrEqual" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.075" constant="40" id="hcI-qT-y58"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="j23-5v-3BD" secondAttribute="trailing" constant="16" id="iSm-3J-ZSY"/>
-                            <constraint firstItem="Asm-Pe-q7f" firstAttribute="top" secondItem="bCN-Ra-c1T" secondAttribute="bottom" constant="5" id="lM0-96-vz7"/>
-                            <constraint firstItem="bCN-Ra-c1T" firstAttribute="top" secondItem="j23-5v-3BD" secondAttribute="bottom" constant="8" symbolic="YES" id="yZr-Do-zJH"/>
+                            <constraint firstItem="ssT-FW-ZiR" firstAttribute="leading" secondItem="o9n-HC-ufp" secondAttribute="trailing" constant="5" id="nUW-Gm-Znh"/>
+                            <constraint firstItem="ssT-FW-ZiR" firstAttribute="top" secondItem="o9n-HC-ufp" secondAttribute="top" id="oLt-wr-Ew2"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="ssT-FW-ZiR" secondAttribute="trailing" symbolic="YES" id="sV3-gw-4fy"/>
+                            <constraint firstItem="bCN-Ra-c1T" firstAttribute="top" secondItem="j23-5v-3BD" secondAttribute="bottom" constant="5" id="voe-La-9sK"/>
+                            <constraint firstItem="wkl-0c-QIY" firstAttribute="top" secondItem="j23-5v-3BD" secondAttribute="bottom" constant="4" id="xKa-DR-gzt"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="NASA Pic Of The Day" id="CjE-EP-1fT"/>
+                    <navigationItem key="navigationItem" title="NASA Pic Of The Day" id="CjE-EP-1fT">
+                        <barButtonItem key="rightBarButtonItem" style="plain" id="S28-2v-B6h">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="3jn-Po-jPR">
+                                <rect key="frame" x="233" y="7" width="71" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Favourite"/>
+                                <connections>
+                                    <action selector="handleFavouriteButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ID1-nN-jBh"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="datePickerTextField" destination="o9n-HC-ufp" id="2oe-su-HqZ"/>
                         <outlet property="descriptionLabel" destination="Asm-Pe-q7f" id="Hqb-pv-Exh"/>
+                        <outlet property="mediaView" destination="wkl-0c-QIY" id="OF1-bZ-Bte"/>
                         <outlet property="nasaImageView" destination="bCN-Ra-c1T" id="sE8-h6-kuQ"/>
                         <outlet property="titleLabel" destination="j23-5v-3BD" id="KYk-nn-ayb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="44.927536231884062" y="60.9375"/>
+            <point key="canvasLocation" x="43.125" y="60"/>
+        </scene>
+        <!--Favourite Table View Controller-->
+        <scene sceneID="7fu-yj-UD3">
+            <objects>
+                <tableViewController storyboardIdentifier="FavouriteTableViewController" id="3J4-cd-OWK" customClass="FavouriteTableViewController" customModule="NasaAstronomy" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="WoP-9l-ThB">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="bjn-IV-Ohf">
+                                <rect key="frame" x="0.0" y="28" width="320" height="43.5"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="bjn-IV-Ohf" id="VEc-NA-9zJ">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="3J4-cd-OWK" id="xNF-bR-aCy"/>
+                            <outlet property="delegate" destination="3J4-cd-OWK" id="exF-QQ-b6c"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Y8M-Gi-Xqu" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="689" y="66"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Vbp-ce-kXY">
@@ -81,7 +140,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="lMf-BD-5jC" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Exk-uL-thY">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
